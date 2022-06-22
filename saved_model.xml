@@ -1,0 +1,890 @@
+<?xml version="1.0" ?>
+<net name="saved_model" version="10">
+	<layers>
+		<layer id="0" name="conv2d_input" type="Parameter" version="opset1">
+			<data element_type="f32" shape="2,3,300,300"/>
+			<output>
+				<port id="0" names="Func/StatefulPartitionedCall/input/_0:0,conv2d_input:0" precision="FP32">
+					<dim>2</dim>
+					<dim>3</dim>
+					<dim>300</dim>
+					<dim>300</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="1" name="StatefulPartitionedCall/sequential/conv2d/Conv2D/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="0" shape="24,3,5,5" size="7200"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d/Conv2D/ReadVariableOp:0" precision="FP32">
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="2" name="StatefulPartitionedCall/sequential/conv2d/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="valid" dilations="1,1" pads_begin="0,0" pads_end="0,0" strides="2,2"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>3</dim>
+					<dim>300</dim>
+					<dim>300</dim>
+				</port>
+				<port id="1">
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d/Conv2D:0" precision="FP32">
+					<dim>2</dim>
+					<dim>24</dim>
+					<dim>148</dim>
+					<dim>148</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="3" name="StatefulPartitionedCall/sequential/conv2d/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="7200" shape="1,24,1,1" size="96"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="4" name="StatefulPartitionedCall/sequential/conv2d/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>24</dim>
+					<dim>148</dim>
+					<dim>148</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d/BiasAdd:0" precision="FP32">
+					<dim>2</dim>
+					<dim>24</dim>
+					<dim>148</dim>
+					<dim>148</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="5" name="StatefulPartitionedCall/sequential/conv2d/Elu" type="Elu" version="opset1">
+			<data alpha="1.0"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>24</dim>
+					<dim>148</dim>
+					<dim>148</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" names="StatefulPartitionedCall/sequential/conv2d/Elu:0" precision="FP32">
+					<dim>2</dim>
+					<dim>24</dim>
+					<dim>148</dim>
+					<dim>148</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="6" name="StatefulPartitionedCall/sequential/conv2d_1/Conv2D/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="7296" shape="36,24,5,5" size="86400"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d_1/Conv2D/ReadVariableOp:0" precision="FP32">
+					<dim>36</dim>
+					<dim>24</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="7" name="StatefulPartitionedCall/sequential/conv2d_1/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="valid" dilations="1,1" pads_begin="0,0" pads_end="0,0" strides="2,2"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>24</dim>
+					<dim>148</dim>
+					<dim>148</dim>
+				</port>
+				<port id="1">
+					<dim>36</dim>
+					<dim>24</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_1/Conv2D:0" precision="FP32">
+					<dim>2</dim>
+					<dim>36</dim>
+					<dim>72</dim>
+					<dim>72</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="8" name="StatefulPartitionedCall/sequential/conv2d_1/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="93696" shape="1,36,1,1" size="144"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d_1/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>36</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="9" name="StatefulPartitionedCall/sequential/conv2d_1/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>36</dim>
+					<dim>72</dim>
+					<dim>72</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>36</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_1/BiasAdd:0" precision="FP32">
+					<dim>2</dim>
+					<dim>36</dim>
+					<dim>72</dim>
+					<dim>72</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="10" name="StatefulPartitionedCall/sequential/conv2d_1/Elu" type="Elu" version="opset1">
+			<data alpha="1.0"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>36</dim>
+					<dim>72</dim>
+					<dim>72</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" names="StatefulPartitionedCall/sequential/conv2d_1/Elu:0" precision="FP32">
+					<dim>2</dim>
+					<dim>36</dim>
+					<dim>72</dim>
+					<dim>72</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="11" name="StatefulPartitionedCall/sequential/conv2d_2/Conv2D/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="93840" shape="48,36,5,5" size="172800"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d_2/Conv2D/ReadVariableOp:0" precision="FP32">
+					<dim>48</dim>
+					<dim>36</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="12" name="StatefulPartitionedCall/sequential/conv2d_2/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="valid" dilations="1,1" pads_begin="0,0" pads_end="0,0" strides="2,2"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>36</dim>
+					<dim>72</dim>
+					<dim>72</dim>
+				</port>
+				<port id="1">
+					<dim>48</dim>
+					<dim>36</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_2/Conv2D:0" precision="FP32">
+					<dim>2</dim>
+					<dim>48</dim>
+					<dim>34</dim>
+					<dim>34</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="13" name="StatefulPartitionedCall/sequential/conv2d_2/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="266640" shape="1,48,1,1" size="192"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d_2/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="14" name="StatefulPartitionedCall/sequential/conv2d_2/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>48</dim>
+					<dim>34</dim>
+					<dim>34</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>48</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_2/BiasAdd:0" precision="FP32">
+					<dim>2</dim>
+					<dim>48</dim>
+					<dim>34</dim>
+					<dim>34</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="15" name="StatefulPartitionedCall/sequential/conv2d_2/Elu" type="Elu" version="opset1">
+			<data alpha="1.0"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>48</dim>
+					<dim>34</dim>
+					<dim>34</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" names="StatefulPartitionedCall/sequential/conv2d_2/Elu:0" precision="FP32">
+					<dim>2</dim>
+					<dim>48</dim>
+					<dim>34</dim>
+					<dim>34</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="16" name="StatefulPartitionedCall/sequential/conv2d_3/Conv2D/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="266832" shape="64,48,3,3" size="110592"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d_3/Conv2D/ReadVariableOp:0" precision="FP32">
+					<dim>64</dim>
+					<dim>48</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="17" name="StatefulPartitionedCall/sequential/conv2d_3/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="valid" dilations="1,1" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>48</dim>
+					<dim>34</dim>
+					<dim>34</dim>
+				</port>
+				<port id="1">
+					<dim>64</dim>
+					<dim>48</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_3/Conv2D:0" precision="FP32">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>32</dim>
+					<dim>32</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="18" name="StatefulPartitionedCall/sequential/conv2d_3/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="377424" shape="1,64,1,1" size="256"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d_3/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="19" name="StatefulPartitionedCall/sequential/conv2d_3/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>32</dim>
+					<dim>32</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_3/BiasAdd:0" precision="FP32">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>32</dim>
+					<dim>32</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="20" name="StatefulPartitionedCall/sequential/conv2d_3/Elu" type="Elu" version="opset1">
+			<data alpha="1.0"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>32</dim>
+					<dim>32</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" names="StatefulPartitionedCall/sequential/conv2d_3/Elu:0" precision="FP32">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>32</dim>
+					<dim>32</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="21" name="StatefulPartitionedCall/sequential/conv2d_4/Conv2D/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="377680" shape="64,64,3,3" size="147456"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d_4/Conv2D/ReadVariableOp:0" precision="FP32">
+					<dim>64</dim>
+					<dim>64</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="22" name="StatefulPartitionedCall/sequential/conv2d_4/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="valid" dilations="1,1" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>32</dim>
+					<dim>32</dim>
+				</port>
+				<port id="1">
+					<dim>64</dim>
+					<dim>64</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_4/Conv2D:0" precision="FP32">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>30</dim>
+					<dim>30</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="23" name="StatefulPartitionedCall/sequential/conv2d_4/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="525136" shape="1,64,1,1" size="256"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/conv2d_4/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="24" name="StatefulPartitionedCall/sequential/conv2d_4/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>30</dim>
+					<dim>30</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_4/BiasAdd:0" precision="FP32">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>30</dim>
+					<dim>30</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="25" name="StatefulPartitionedCall/sequential/conv2d_4/Elu" type="Elu" version="opset1">
+			<data alpha="1.0"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>30</dim>
+					<dim>30</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>30</dim>
+					<dim>30</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="26" name="StatefulPartitionedCall/sequential/conv2d_4/Elu/Transpose/value9751674" type="Const" version="opset1">
+			<data element_type="i64" offset="525392" shape="4" size="32"/>
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="27" name="StatefulPartitionedCall/sequential/conv2d_4/Elu/Transpose" type="Transpose" version="opset1">
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>64</dim>
+					<dim>30</dim>
+					<dim>30</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/conv2d_4/Elu:0" precision="FP32">
+					<dim>2</dim>
+					<dim>30</dim>
+					<dim>30</dim>
+					<dim>64</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="28" name="StatefulPartitionedCall/sequential/flatten/Const" type="Const" version="opset1">
+			<data element_type="i64" offset="525424" shape="2" size="16"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/flatten/Const:0" precision="I64">
+					<dim>2</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="29" name="StatefulPartitionedCall/sequential/flatten/Reshape" type="Reshape" version="opset1">
+			<data special_zero="false"/>
+			<input>
+				<port id="0">
+					<dim>2</dim>
+					<dim>30</dim>
+					<dim>30</dim>
+					<dim>64</dim>
+				</port>
+				<port id="1">
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/flatten/Reshape:0" precision="FP32">
+					<dim>100</dim>
+					<dim>1152</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="30" name="StatefulPartitionedCall/sequential/dense/MatMul/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="525440" shape="100,1152" size="460800"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/dense/MatMul/ReadVariableOp:0" precision="FP32">
+					<dim>100</dim>
+					<dim>1152</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="31" name="StatefulPartitionedCall/sequential/dense/MatMul" type="MatMul" version="opset1">
+			<data transpose_a="false" transpose_b="true"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>1152</dim>
+				</port>
+				<port id="1">
+					<dim>100</dim>
+					<dim>1152</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/dense/MatMul:0" precision="FP32">
+					<dim>100</dim>
+					<dim>100</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="32" name="StatefulPartitionedCall/sequential/dense/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="986240" shape="1,100" size="400"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/dense/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>100</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="33" name="StatefulPartitionedCall/sequential/dense/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>100</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>100</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/dense/BiasAdd:0" precision="FP32">
+					<dim>100</dim>
+					<dim>100</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="34" name="StatefulPartitionedCall/sequential/dense/Elu" type="Elu" version="opset1">
+			<data alpha="1.0"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>100</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" names="StatefulPartitionedCall/sequential/dense/Elu:0" precision="FP32">
+					<dim>100</dim>
+					<dim>100</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="35" name="StatefulPartitionedCall/sequential/dense_1/MatMul/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="986640" shape="50,100" size="20000"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/dense_1/MatMul/ReadVariableOp:0" precision="FP32">
+					<dim>50</dim>
+					<dim>100</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="36" name="StatefulPartitionedCall/sequential/dense_1/MatMul" type="MatMul" version="opset1">
+			<data transpose_a="false" transpose_b="true"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>100</dim>
+				</port>
+				<port id="1">
+					<dim>50</dim>
+					<dim>100</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/dense_1/MatMul:0" precision="FP32">
+					<dim>100</dim>
+					<dim>50</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="37" name="StatefulPartitionedCall/sequential/dense_1/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="1006640" shape="1,50" size="200"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/dense_1/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>50</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="38" name="StatefulPartitionedCall/sequential/dense_1/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>50</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>50</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/dense_1/BiasAdd:0" precision="FP32">
+					<dim>100</dim>
+					<dim>50</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="39" name="StatefulPartitionedCall/sequential/dense_1/Elu" type="Elu" version="opset1">
+			<data alpha="1.0"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>50</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" names="StatefulPartitionedCall/sequential/dense_1/Elu:0" precision="FP32">
+					<dim>100</dim>
+					<dim>50</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="40" name="StatefulPartitionedCall/sequential/dense_2/MatMul/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="1006840" shape="10,50" size="2000"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/dense_2/MatMul/ReadVariableOp:0" precision="FP32">
+					<dim>10</dim>
+					<dim>50</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="41" name="StatefulPartitionedCall/sequential/dense_2/MatMul" type="MatMul" version="opset1">
+			<data transpose_a="false" transpose_b="true"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>50</dim>
+				</port>
+				<port id="1">
+					<dim>10</dim>
+					<dim>50</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/dense_2/MatMul:0" precision="FP32">
+					<dim>100</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="42" name="StatefulPartitionedCall/sequential/dense_2/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="1008840" shape="1,10" size="40"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/dense_2/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="43" name="StatefulPartitionedCall/sequential/dense_2/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>10</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/dense_2/BiasAdd:0" precision="FP32">
+					<dim>100</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="44" name="StatefulPartitionedCall/sequential/dense_2/Elu" type="Elu" version="opset1">
+			<data alpha="1.0"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" names="StatefulPartitionedCall/sequential/dense_2/Elu:0" precision="FP32">
+					<dim>100</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="45" name="StatefulPartitionedCall/sequential/dense_3/MatMul/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="1008880" shape="1,10" size="40"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/dense_3/MatMul/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="46" name="StatefulPartitionedCall/sequential/dense_3/MatMul" type="MatMul" version="opset1">
+			<data transpose_a="false" transpose_b="true"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>10</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="StatefulPartitionedCall/sequential/dense_3/MatMul:0" precision="FP32">
+					<dim>100</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="47" name="StatefulPartitionedCall/sequential/dense_3/BiasAdd/ReadVariableOp" type="Const" version="opset1">
+			<data element_type="f32" offset="1008920" shape="1,1" size="4"/>
+			<output>
+				<port id="0" names="StatefulPartitionedCall/sequential/dense_3/BiasAdd/ReadVariableOp:0" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="48" name="StatefulPartitionedCall/sequential/dense_3/BiasAdd/Add" type="Add" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>1</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" names="Func/StatefulPartitionedCall/output/_19:0,Identity:0,StatefulPartitionedCall/Identity:0,StatefulPartitionedCall/sequential/dense_3/BiasAdd:0" precision="FP32">
+					<dim>100</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="49" name="Func/StatefulPartitionedCall/output/_19:0" type="Result" version="opset1">
+			<input>
+				<port id="0">
+					<dim>100</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="0" from-port="0" to-layer="2" to-port="0"/>
+		<edge from-layer="1" from-port="0" to-layer="2" to-port="1"/>
+		<edge from-layer="2" from-port="2" to-layer="4" to-port="0"/>
+		<edge from-layer="3" from-port="0" to-layer="4" to-port="1"/>
+		<edge from-layer="4" from-port="2" to-layer="5" to-port="0"/>
+		<edge from-layer="5" from-port="1" to-layer="7" to-port="0"/>
+		<edge from-layer="6" from-port="0" to-layer="7" to-port="1"/>
+		<edge from-layer="7" from-port="2" to-layer="9" to-port="0"/>
+		<edge from-layer="8" from-port="0" to-layer="9" to-port="1"/>
+		<edge from-layer="9" from-port="2" to-layer="10" to-port="0"/>
+		<edge from-layer="10" from-port="1" to-layer="12" to-port="0"/>
+		<edge from-layer="11" from-port="0" to-layer="12" to-port="1"/>
+		<edge from-layer="12" from-port="2" to-layer="14" to-port="0"/>
+		<edge from-layer="13" from-port="0" to-layer="14" to-port="1"/>
+		<edge from-layer="14" from-port="2" to-layer="15" to-port="0"/>
+		<edge from-layer="15" from-port="1" to-layer="17" to-port="0"/>
+		<edge from-layer="16" from-port="0" to-layer="17" to-port="1"/>
+		<edge from-layer="17" from-port="2" to-layer="19" to-port="0"/>
+		<edge from-layer="18" from-port="0" to-layer="19" to-port="1"/>
+		<edge from-layer="19" from-port="2" to-layer="20" to-port="0"/>
+		<edge from-layer="20" from-port="1" to-layer="22" to-port="0"/>
+		<edge from-layer="21" from-port="0" to-layer="22" to-port="1"/>
+		<edge from-layer="22" from-port="2" to-layer="24" to-port="0"/>
+		<edge from-layer="23" from-port="0" to-layer="24" to-port="1"/>
+		<edge from-layer="24" from-port="2" to-layer="25" to-port="0"/>
+		<edge from-layer="25" from-port="1" to-layer="27" to-port="0"/>
+		<edge from-layer="26" from-port="0" to-layer="27" to-port="1"/>
+		<edge from-layer="27" from-port="2" to-layer="29" to-port="0"/>
+		<edge from-layer="28" from-port="0" to-layer="29" to-port="1"/>
+		<edge from-layer="29" from-port="2" to-layer="31" to-port="0"/>
+		<edge from-layer="30" from-port="0" to-layer="31" to-port="1"/>
+		<edge from-layer="31" from-port="2" to-layer="33" to-port="0"/>
+		<edge from-layer="32" from-port="0" to-layer="33" to-port="1"/>
+		<edge from-layer="33" from-port="2" to-layer="34" to-port="0"/>
+		<edge from-layer="34" from-port="1" to-layer="36" to-port="0"/>
+		<edge from-layer="35" from-port="0" to-layer="36" to-port="1"/>
+		<edge from-layer="36" from-port="2" to-layer="38" to-port="0"/>
+		<edge from-layer="37" from-port="0" to-layer="38" to-port="1"/>
+		<edge from-layer="38" from-port="2" to-layer="39" to-port="0"/>
+		<edge from-layer="39" from-port="1" to-layer="41" to-port="0"/>
+		<edge from-layer="40" from-port="0" to-layer="41" to-port="1"/>
+		<edge from-layer="41" from-port="2" to-layer="43" to-port="0"/>
+		<edge from-layer="42" from-port="0" to-layer="43" to-port="1"/>
+		<edge from-layer="43" from-port="2" to-layer="44" to-port="0"/>
+		<edge from-layer="44" from-port="1" to-layer="46" to-port="0"/>
+		<edge from-layer="45" from-port="0" to-layer="46" to-port="1"/>
+		<edge from-layer="46" from-port="2" to-layer="48" to-port="0"/>
+		<edge from-layer="47" from-port="0" to-layer="48" to-port="1"/>
+		<edge from-layer="48" from-port="2" to-layer="49" to-port="0"/>
+	</edges>
+	<meta_data>
+		<MO_version value="unknown version"/>
+		<cli_parameters>
+			<data_type value="float"/>
+			<disable_nhwc_to_nchw value="False"/>
+			<disable_resnet_optimization value="False"/>
+			<disable_weights_compression value="False"/>
+			<enable_concat_optimization value="False"/>
+			<extensions value="DIR"/>
+			<framework value="tf"/>
+			<freeze_placeholder_with_value value="{}"/>
+			<generate_deprecated_IR_V7 value="False"/>
+			<input_model_is_text value="False"/>
+			<input_shape value="[2,300,300,3]"/>
+			<keep_shape_ops value="True"/>
+			<legacy_ir_generation value="False"/>
+			<log_level value="ERROR"/>
+			<mean_scale_values value="{}"/>
+			<mean_values value="()"/>
+			<model_name value="saved_model"/>
+			<output_dir value="DIR"/>
+			<placeholder_data_types value="{}"/>
+			<placeholder_shapes value="[  2 300 300   3]"/>
+			<progress value="False"/>
+			<reverse_input_channels value="False"/>
+			<saved_model_dir value="DIR"/>
+			<scale_values value="()"/>
+			<silent value="False"/>
+			<static_shape value="False"/>
+			<stream_output value="False"/>
+			<transform value=""/>
+			<unset unset_cli_parameters="batch, disable_fusing, disable_gfusing, finegrain_fusing, input, input_checkpoint, input_meta_graph, input_model, move_to_preprocess, output, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_object_detection_api_pipeline_config, tensorflow_use_custom_operations_config, transformations_config"/>
+		</cli_parameters>
+	</meta_data>
+</net>
